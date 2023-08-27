@@ -8,20 +8,30 @@ num_adult = int(input("How many adults(age 19+) are you booking for? "))
 num_teen = int(input("How many teens(age 13+) are you coming with you? "))
 num_bigbaby = int(input("How many children(age 2+) are you coming with you? "))
 num_baby = int(input("How many baby are you coming with you? "))
-destination = int(input("""Where are you going to?
+depart = int(input("""Where are you taking off from?
 1 for Hamilton, 2 for Rotorua, 3 for Auckland. """))
-clawss = int(input("""What class of flight would you like?
-"""))
+destination = int(input("""Where are you traveling to?
+1 for Hamilton, 2 for Rotorua, 3 for Auckland. """))
+fclass = int(input("""What class of flight would you like?
+1 for first class, 2 for busniss class, 3 for economy class."""))
+
 # destination stuff
-if destination == 1:
-	destination_price = 1
-	destination = "Ham"
-elif destination == 2:
-	destination = "Rat"
+if depart == 1 and destination == 2:
+	destination_price = 100
+	depart = "Rat"
+	destination = "ham"
+elif depart == 1 and destination == 2:
+	destination_price = 150
+	depart = "Ham"
+	destination = "rat"
 elif destination == 3:
-	destination = "Duckland"
+	destination = "duckland"
 else:
 	print("you suck")
+
+#flight class stuff
+if fclass == 1:
+	fclass
 # grouping age groups
 older = num_old + num_adult
 younger = num_teen + num_bigbaby + num_baby
