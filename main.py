@@ -1,19 +1,35 @@
 # https://www.airnewzealand.co.nz/flights/en-nz/flights-from-auckland-to-wellington
 # https://www.dthm4kaiako.ac.nz/resources/resource/74/csfg-ncea-guide-for-as91371-244/
 import random
+from time import sleep
+
+#colouring
+def rgb(r, g, b):
+    return f"\033[38;2;{r};{g};{b}m"
+Error = rgb(255,105,105)
 
 #stuff
 num_people = 1
 num_full_seat = 0
-num_full_seat = random.randint(0, 100)
+num_full_seat = random.randint(0, 248)
 
+# num_people_ask catch
+def num_people_ask(num_people):
+	while True:
+		try:
+			num_people = int(input("how many people are coming with you(includeing you)? "))
+			if num_people > 0 and num_people < 249:
+				break
+			else:
+				print("exceeds the number of seats available")
+		except ValueError:
+			print("exceeds the number of seats available")
+			
 # welcome user
-print("Hello user,")
+print(f"{Error}Hello user,")
 name = input("What is your name? ")
 print("Hello",name,"I hope you are having a good day. ")
-num_people = int(input("how many people are coming with you(includeing you)? "))
-depart = int(input("""Where are you taking off from?
-1 for Hamilton, 2 for Rotorua, 3 for Auckland. """))
+num_people_ask(num_people)
 destination = int(input("""Where are you traveling to?
 1 for Hamilton, 2 for Rotorua, 3 for Auckland. """))
 fclass = int(input("""What class of flight would you like?
@@ -21,32 +37,17 @@ fclass = int(input("""What class of flight would you like?
 leave_day = input("""when do are you planing on departing? 
 'today', 'tomorrow', or the 'day after'. """)
 leave_day = leave_day.strip().lower()
-
+			
 # destination stuff
-if depart == 1 and destination == 2:
-	destination_price = 50
-	depart = "Hamilton"
-	destination = "Rotorua"
-elif depart == 1 and destination == 3:
-	destination_price = 70
-	depart = "Hamilton"
-	destination = "Auckland"
-elif depart == 2 and destination == 1:
+if destination == 1:
+	destination_price = 40
+	destination = "Hamilton"
+elif destination == 2:
 	destination_price = 60
-	depart = "Rotorua"
-	destination = "Hamilton"
-elif depart == 2 and destination == 3:
-	destination_price = 130
-	depart = "Rotorua"
-	destination = "Auckland"
-elif depart == 3 and destination == 1:
-	destination_price = 80
-	depart = "Auckland"
-	destination = "Hamilton"
-elif depart == 3 and destination == 2:
-	destination_price = 140
-	depart = "Auckland"
 	destination = "Rotorua"
+elif destination == 3:
+	destination_price = 50
+	destination = "Auckland"
 else:
 	print("you suck")
 
@@ -60,8 +61,15 @@ elif fclass == 2:
 elif fclass == 3:
 	fclass = "economy class"
 	class_price = 1
+
 # seats left
 num_full_seat += num_people
+
+# leaving logic
+if leave_day == "today":
+	leave_dayn = 1
+elif leave_day == "tomorrow":
+	leave_day_n = 2
 
 #full price
 full_price = 0
