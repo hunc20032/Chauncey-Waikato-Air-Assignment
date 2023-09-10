@@ -9,7 +9,6 @@ def rgb(r, g, b):
 Error = rgb(255,105,105)
 
 #stuff
-num_people = 1
 num_full_seat = 0
 num_full_seat = random.randint(0, 248)
 
@@ -17,19 +16,18 @@ num_full_seat = random.randint(0, 248)
 def num_people_ask(num_people):
 	while True:
 		try:
-			num_people = int(input("how many people are coming with you(includeing you)? "))
+			num_people = int(input("how many people are coming with you(includeing you)? "))	
 			if num_people > 0 and num_people < 249:
+				return num_people
 				break
-			else:
-				print("exceeds the number of seats available")
 		except ValueError:
-			print("exceeds the number of seats available")
+			print("exceeds the number of seats available or invald input")
 			
 # welcome user
 print(f"{Error}Hello user,")
 name = input("What is your name? ")
 print("Hello",name,"I hope you are having a good day. ")
-num_people_ask(num_people)
+num_people_ask()
 destination = int(input("""Where are you traveling to?
 1 for Hamilton, 2 for Rotorua, 3 for Auckland. """))
 fclass = int(input("""What class of flight would you like?
