@@ -14,22 +14,24 @@ num_full_seat = 0
 num_full_seat = random.randint(0, 248)
 
 # num_people_ask catch
-def num_people_ask():
+def npa():
+	print("We have",248-num_full_seat,"left ")
 	while True:
 		try:
-			num_people = int(input("how many people are coming with you(includeing you)? "))	
-			if num_people > 0 and num_people < 249:
-				print("it works")
+			num_people = int(input("How many people are coming with you(includeing you)? "))	
+			if num_people > 0 and num_people < 249 - num_full_seat:
 				return num_people
 				break
+			else:
+				print("exceeds the number of seats available")
 		except ValueError:
-			print("exceeds the number of seats available or invald input")
+			print("invald input")
 
 # welcome user
 print(f"{white}Hello user,")
 name = input("What is your name? ")
 print("Hello",name,"I hope you are having a good day. ")
-npa = num_people_ask()
+num_people_ask = npa()
 destination = int(input("""Where are you traveling to?
 1 for Hamilton, 2 for Rotorua, 3 for Auckland. """))
 fclass = int(input("""What class of flight would you like?
@@ -63,7 +65,7 @@ elif fclass == 3:
 	class_price = 1
 
 # seats left
-num_full_seat += npa
+num_full_seat += num_people_ask
 
 # leaving logic
 if leave_day == "today":
@@ -73,20 +75,20 @@ elif leave_day == "tomorrow":
 
 #full price
 full_price = 0
-def work(full_price, destination_price, npa, class_price, num_full_seat):
-	full_price += (destination_price * npa)
+def work(full_price, destination_price, num_people_ask, class_price, num_full_seat):
+	full_price += (destination_price * num_people_ask)
 	full_price *= class_price
 	if num_full_seat > 75:
 		full_price *= 1.2
 	return full_price
 	print(full_price)
-work(full_price, destination_price, npa, class_price, num_full_seat)
+work(full_price, destination_price, num_people_ask, class_price, num_full_seat)
 
 # user data
 print("""name:""",name,"""
-people""",npa,"""
+people""",num_people_ask,"""
 destination:""",destination,"""
 Seat Class:""",fclass,"""
 full steats:""",num_full_seat,"""
-Price:""",work(full_price, destination_price, npa, class_price, num_full_seat),"""
+Price:""",work(full_price, destination_price, num_people_ask, class_price, num_full_seat),"""
 """)
