@@ -85,24 +85,19 @@ def leafd():
 	while True:
 		try:
 			leave_day = int(input("""when do are you planing on departing? 
-1 for today, 2 for tomorrow, 3 for the day after, or 4 for other. """))
+1 for tomorrow, 2 for the day after, or 3 for other. """))
 			if leave_day == 1:
-				leave_day = "First class"
+				leave_day = "tomorrow"
 				leave_price = 1.8
 				return leave_price,leave_day
 				break
 			elif leave_day == 2:
-				leave_day = "Business class"
-				leave_price = 1.6
+				leave_day = "after tomorrow"
+				leave_price = 1.5
 				return leave_price,leave_day
 				break
 			elif leave_day == 3:
-				leave_day = "economy class"
-				leave_price = 1.4
-				return leave_price,leave_day
-				break
-			elif leave_day == 4:
-				leave_day = "economy class"
+				leave_day = "other day"
 				leave_price = 1.1
 				return leave_price,leave_day
 				break
@@ -119,7 +114,6 @@ num_people_ask = npa()
 destination_price = des()
 fclass = seat()
 leave_day = leafd()
-		
 # seats left
 num_full_seat += num_people_ask
 
@@ -130,7 +124,7 @@ def work(full_price, destination_price, num_people_ask, fclass, num_full_seat):
 	full_price *= fclass[0]
 	if num_full_seat > 75:
 		full_price *= 1.2
-	full_price *=leave_day
+	full_price *= leave_day[0]
 	full_price = round(full_price, 2)
 	return full_price
 work(full_price, destination_price, num_people_ask, fclass, num_full_seat)
@@ -141,7 +135,8 @@ Full steats:""",num_full_seat,"""
 people""",num_people_ask,"""
 destination:""",destination_price[1],"""
 Seat Class:""",fclass[1],"""
-full steats:""",num_full_seat,"""
+flight date:""",leave_day[1],"""
 Price:""",work(full_price, destination_price, num_people_ask, fclass, num_full_seat),"""
 """)
 confirm = input("Confirm? Y or N ")
+print("good for you") 
