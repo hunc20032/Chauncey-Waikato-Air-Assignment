@@ -1,7 +1,6 @@
 # https://www.airnewzealand.co.nz/flights/en-nz/flights-from-auckland-to-wellington
 # https://www.dthm4kaiako.ac.nz/resources/resource/74/csfg-ncea-guide-for-as91371-244/
 import random
-from time import sleep
 
 # colouring
 def rgb(r, g, b):
@@ -11,12 +10,17 @@ white = rgb(255,255,255)
 
 # stuff
 # i get the number of steats from the boeing 787-8
-num_full_seat = 0
-num_full_seat = random.randint(0, 248)
+num_full_seat_auck = 0
+num_full_seat_rot = 0
+num_full_seat_ham = 0
+num_full_seat_auck = random.randint(0, 248)
+num_full_seat_ham = random.randint(0, 248)
+num_full_seat_rot = random.randint(0, 248)
+destination = 1
 
 # num_people_ask catch
 def npa():
-	print("We have",248-num_full_seat,"seats left ")
+	print("We have",248-num_full_seat,"seats left on the Auck ")
 	while True:
 		try:
 			num_people = int(input("How many people are coming with you(including you)? "))	
@@ -110,8 +114,8 @@ def leafd():
 print(f"{white}Hello and welcome to Waikato airborn,")
 name = input("What is your name? ")
 print("Hello",name,"I hope you are having a good day. ")
-num_people_ask = npa()
 destination_price = des()
+num_people_ask = npa()
 fclass = seat()
 leave_day = leafd()
 # seats left
