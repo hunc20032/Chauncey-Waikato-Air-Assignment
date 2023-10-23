@@ -13,6 +13,7 @@ white = rgb(255,255,255)
 num_full_seat_auck = 0
 num_full_seat_rot = 0
 num_full_seat_ham = 0
+num_full_seat = 0
 num_full_seat_auck = random.randint(0, 248)
 num_full_seat_ham = random.randint(0, 248)
 num_full_seat_rot = random.randint(0, 248)
@@ -20,6 +21,8 @@ destination = 1
 
 # num_people_ask catch
 def npa():
+	if destination == 1:
+		num_full_seat = num_full_seat_auck
 	print("We have",248-num_full_seat,"seats left on the Auck ")
 	while True:
 		try:
@@ -118,8 +121,14 @@ destination_price = des()
 num_people_ask = npa()
 fclass = seat()
 leave_day = leafd()
+
 # seats left
-num_full_seat += num_people_ask
+if destination_price == 39.99:
+	num_full_seat = num_full_seat_ham
+elif destination_price == 59.99:
+	num_full_seat = num_full_seat_rot
+elif destination_price == 54.99:
+	num_full_seat = num_full_seat_auck
 
 #full price
 full_price = 0
