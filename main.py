@@ -8,27 +8,31 @@ def rgb(r, g, b):
 Error = rgb(255,105,105)
 white = rgb(255,255,255)
 
-# stuff
 # i get the number of steats from the boeing 787-8
-num_full_seat_auck = 0
-num_full_seat_rot = 0
-num_full_seat_ham = 0
-num_full_seat = 0
 num_full_seat_auck = random.randint(0, 248)
 num_full_seat_ham = random.randint(0, 248)
 num_full_seat_rot = random.randint(0, 248)
+full_bookings = {"Auckland": num_full_seat_auck, "Hamilton": num_full_seat_ham, "Rotorua": num_full_seat_rot}
 destination = 1
 
 # num_people_ask catch
 def npa():
-	if destination == 1:
-		num_full_seat = num_full_seat_auck
-	print("We have",248-num_full_seat,"seats left on the Auck ")
+	num_full_seat = 0
+	if destination_price[0] == 54.99:
+		num_full_seat = full_bookings["Auckland"]
+		print("We have", 248 - num_full_seat, "seats left on the Auckland ")
+	elif destination_price[0] == 39.99:
+		num_full_seat = full_bookings["Hamilton"]
+		print("We have", 248 - num_full_seat, "seats left on the Hamilton ")
+	elif destination_price[0] == 59.99:
+		num_full_seat = full_bookings["Rotorua"]
+		print("We have", 248 - num_full_seat, "seats left on the Rotorua ")
+
 	while True:
 		try:
-			num_people = int(input("How many people are coming with you(including you)? "))	
+			num_people = int(input("How many people are you booking for? "))
 			if num_people > 0 and num_people < 249 - num_full_seat:
-				return num_people
+				return num_full_seat + num_people, num_people
 				break
 			else:
 				print("exceeds the number of seats available")
@@ -60,7 +64,7 @@ def des():
 				print("invald input")
 		except ValueError:
 			print("invald input")
-	
+
 # flight class catch
 def seat():
 	while True:
@@ -92,7 +96,7 @@ def leafd():
 	while True:
 		try:
 			leave_day = int(input("""when do are you planing on departing? 
-1 for tomorrow, 2 for the day after, or 3 for other. """))
+type... 1: tomorrow, 2: the day after, or 3: a later date. """))
 			if leave_day == 1:
 				leave_day = "tomorrow"
 				leave_price = 1.8
@@ -115,41 +119,34 @@ def leafd():
 	
 # talk to user
 print(f"{white}Hello and welcome to Waikato airborn,")
-name = input("What is your name? ")
+name = input("What is your username? ")
 print("Hello",name,"I hope you are having a good day. ")
 destination_price = des()
-num_people_ask = npa()
+num_people_ask= npa()
 fclass = seat()
 leave_day = leafd()
 
-# seats left
-if destination_price == 39.99:
-	num_full_seat = num_full_seat_ham
-elif destination_price == 59.99:
-	num_full_seat = num_full_seat_rot
-elif destination_price == 54.99:
-	num_full_seat = num_full_seat_auck
-
 #full price
 full_price = 0
-def work(full_price, destination_price, num_people_ask, fclass, num_full_seat):
-	full_price += (destination_price[0] * num_people_ask)
+def work(full_price, destination_price, num_people_ask, fclass):
+	full_price += (destination_price[0] * num_people_ask[1])
 	full_price *= fclass[0]
-	if num_full_seat > 75:
+	if num_people_ask[0] > 124:
 		full_price *= 1.2
 	full_price *= leave_day[0]
 	full_price = round(full_price, 2)
 	return full_price
-work(full_price, destination_price, num_people_ask, fclass, num_full_seat)
+work(full_price, destination_price, num_people_ask, fclass)
 
 # user data
-print("""name:""",name,"""
-Full steats:""",num_full_seat,"""
-people""",num_people_ask,"""
+print("""
+
+username:""",name,"""
+Full seats:""",num_people_ask[0],"""
+people coming:""",num_people_ask[1],"""
 destination:""",destination_price[1],"""
 Seat Class:""",fclass[1],"""
 flight date:""",leave_day[1],"""
-Price:""",work(full_price, destination_price, num_people_ask, fclass, num_full_seat),"""
-""")
-confirm = input("Confirm? Y or N ")
-print("good for you") 
+Price: $""",work(full_price, destination_price, num_people_ask, fclass),"""
+ticket number:""""",random.randint(1,248),
+"""""")
