@@ -1,6 +1,5 @@
 # import libraries
 import random
-import sys
 
 
 def get_destination_price():
@@ -87,8 +86,8 @@ def calculate_full_price(destination_price, num_people_ask, fclass, leave_day):
 	full_price = round(full_price, 2)
 	return full_price
 
-# Print the ticket information
 def print_ticket_info(name, num_people_ask, destination_price, fclass, leave_day, full_price):
+	# Print the ticket information
 	print(f"""
 	Username: {name}
 	Full seats: {num_people_ask[0]}
@@ -100,34 +99,17 @@ def print_ticket_info(name, num_people_ask, destination_price, fclass, leave_day
 	Ticket number: {random.randint(1, 248)}
 	""")
 
-# Ask the user if they want to book another ticket
-def ask_second_booking():
-	while True:
-		try:
-			# Prompt the user for the booking confirmation
-			booking_confirmation = input("Would you like to book another ticket? (Y/N)")
-			booking_confirmation = booking_confirmation.upper().strip()
-			if booking_confirmation == "Y":
-				full_price = calculate_full_price(destination_price, num_people_ask, fclass, leave_day)
-				print_ticket_info(name, num_people_ask, destination_price, fclass, leave_day, full_price)
-			elif booking_confirmation == "N":
-				sys.exit()
-			else:
-				print("Invalid input")
-		except ValueError:
-			print("Invalid input")
-
-# making repeating ask unless the used declines
-	
 # Generate random bookings
 full_bookings = {
 	"Auckland": random.randint(0, 248),
 	"Hamilton": random.randint(0, 248),
-	"Rotorua": random.randint(0, 248)}
+	"Rotorua": random.randint(0, 248)
+}
 
 print("Hello and welcome to Waikato airborn,")
 name = input("What is your username? ")
 print(f"Hello {name}, I hope you are having a good day. ")
+
 destination_price = get_destination_price()
 num_people_ask = get_num_people()
 fclass = get_seat_class()
@@ -135,5 +117,8 @@ leave_day = get_leave_day()
 
 full_price = calculate_full_price(destination_price, num_people_ask, fclass, leave_day)
 print_ticket_info(name, num_people_ask, destination_price, fclass, leave_day, full_price)
+again = input("Would you like to book another ticket? (y/n) ")
+if again == "y":
 
-ask_second_booking()
+else:
+	print("Thank you for using Waikato airborn, have a nice day!")
