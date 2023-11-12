@@ -2,6 +2,11 @@
 import random
 import sys
 
+# to do: error catch username, fix number of full seats (with dictionares)
+# no number in username
+def contains_number(string):
+	return any(char.isdigit() for char in string)
+	
 # ask user where they would like to go
 def get_destination_price():
 	while True:
@@ -74,7 +79,26 @@ Type... 1: tomorrow, 2: the day after, or 3: a later date. """))
 		except ValueError:
 			print("Invalid input")
 
-#calculate the price
+# ask user there name
+def get_username():
+	while True:
+		try:
+			name = input("What is your username? ")
+			namelength = len(name)
+			if namelength >= 2 and contains_number(name) == False:
+				break
+			elif contains_number(name) == True:
+				print("username may not contain numbers")
+			elif namelength < 2:
+				print("username must be at least 2 characters")
+			else:
+				print("Invalid input")
+		except ValueError:
+			print("Invalid input")
+	print(f"Hello {name}, I hope you are having a good day. ")
+	return name
+
+# calculate the price
 def calculate_full_price(destination_price, num_people_ask, fclass, leave_day):
 	full_price = (destination_price[0] * num_people_ask[1]) * fclass[0]
 	if num_people_ask[0] > 124:
@@ -103,9 +127,7 @@ def ask_second_booking():
 			booking_confirmation = input("Would you like to book another ticket? (Y/N)" )
 			booking_confirmation = booking_confirmation.upper().strip()
 			if booking_confirmation == "Y":
-				print("Hello and welcome to Waikato airborn,")
-				name = input("What is your username? ")
-				print(f"Hello {name}, I hope you are having a good day. ")
+				name = get_username()
 				destination_price = get_destination_price()
 				num_people_ask = get_num_people()
 				fclass = get_seat_class()
@@ -131,8 +153,7 @@ full_bookings = {
 	"Rotorua": random.randint(0, 248)}
 
 print("Hello and welcome to Waikato airborn,")
-name = input("What is your username? ")
-print(f"Hello {name}, I hope you are having a good day. ")
+name = get_username()
 destination_price = get_destination_price()
 num_people_ask = get_num_people()
 fclass = get_seat_class()
