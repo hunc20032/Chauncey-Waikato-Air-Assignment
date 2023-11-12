@@ -1,13 +1,14 @@
 # import libraries
 import random
 import sys
+# to do: fix number of full seats (with dictionaries)
 
-# to do: error catch username, fix number of full seats (with dictionares)
-# no number in username
+# check if there are numbers in a values
 def contains_number(string):
 	return any(char.isdigit() for char in string)
 	
-# ask user where they would like to go
+# ask where they would like to travel to and tell them the price of the flight
+# return the place and price to be used later
 def get_destination_price():
 	while True:
 		try:
@@ -24,7 +25,7 @@ def get_destination_price():
 		except ValueError:
 			print("Invalid input")
 
-# ask user for the number of people they are traveling with
+# ask user for the number of people they are traveling with (fix me) "don't worry cup i'm on it"
 def get_num_people():
 	while True:
 		try:
@@ -158,7 +159,6 @@ destination_price = get_destination_price()
 num_people_ask = get_num_people()
 fclass = get_seat_class()
 leave_day = get_leave_day()
-
 full_price = calculate_full_price(destination_price, num_people_ask, fclass, leave_day)
 print_ticket_info(name, num_people_ask, destination_price, fclass, leave_day, full_price)
 
