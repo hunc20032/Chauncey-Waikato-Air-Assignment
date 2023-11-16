@@ -3,7 +3,7 @@ import random
 import sys
 
 
-# classmethodheck if there are numbers in a values
+# class method if there are numbers in a values
 def contains_number(string):
 	return any(char.isdigit() for char in string)
 	
@@ -30,6 +30,7 @@ def get_destination_price():
 def get_num_people(destination_price):
 	while True:
 		try:
+			# Auckland part
 			if destination_price[0] == 54.99:
 				print("We have",248 - full_bookings["Auckland"],"seats left on the Auckland flight ")
 				num_people = int(input("How many people are you booking for? "))
@@ -38,7 +39,7 @@ def get_num_people(destination_price):
 					return full_bookings["Auckland"], num_people
 				else:
 					print("Exceeds the number of seats available")
-					
+			# Hamilton part		
 			elif destination_price[0] == 39.99:
 				print("We have",248 - full_bookings["Hamilton"],"seats left on the Hamilton flight ")
 				num_people = int(input("How many people are you booking for? "))
@@ -47,7 +48,7 @@ def get_num_people(destination_price):
 					return full_bookings["Hamilton"], num_people
 				else:
 					print("Exceeds the number of seats available")
-					
+			# Rotorua part
 			elif destination_price[0] == 59.99:
 				print("We have",248 - full_bookings["Rotorua"],"seats left on the Rotorua flight ")
 				num_people = int(input("How many people are you booking for? "))
@@ -56,7 +57,7 @@ def get_num_people(destination_price):
 					return full_bookings["Rotorua"], num_people
 				else:
 					print("Exceeds the number of seats available")
-
+		# just separated to be more readable		
 		except ValueError:
 			print("Invalid input")
 
@@ -66,13 +67,13 @@ def get_seat_class():
 	while True:
 		try:
 			fclass = int(input("""What class of flight would you like?
-1 for first class(2x$), 2 for Business class(1.6x$), 3 for economy class(1.1x$). """))
+1 for first class(2x$), 2 for Business class(1.6x$), 3 for economy class(1.0x$). """))
 			if fclass == 1:
 				return 2, "First class"
 			elif fclass == 2:
 				return 1.6, "Business class"
 			elif fclass == 3:
-				return 1.1, "economy class"
+				return 1.0, "economy class"
 			else:
 				print("Invalid input")
 		except ValueError:
@@ -90,13 +91,14 @@ def get_leave_day():
 			elif leave_day == 2:
 				return 1.5, "after tomorrow"
 			elif leave_day == 3:
-				return 1.1, "other day"
+				return 1.0, "other day"
 			else:
 				print("Invalid input")
 		except ValueError:
 			print("Invalid input")
 
 # ask user there name and check if it is suitable
+# return the name to be used later
 def get_username():
 	while True:
 		try:
